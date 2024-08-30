@@ -1,30 +1,34 @@
+import type { LinksFunction } from "@remix-run/node";
 import {
   Links,
+  LiveReload,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
-import "./tailwind.css";
+import stylesUrl from "./styles/global.css";
 
-export function Layout({ children }: { children: React.ReactNode }) {
+export const links: LinksFunction = () => [
+  { rel: "stylesheet", href: stylesUrl },
+];
+
+export default function App() {
   return (
     <html lang="en">
       <head>
         <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
         <Meta />
         <Links />
       </head>
       <body>
-        {children}
+        <h1>LinkedIn Poster</h1>
+        <Outlet />
         <ScrollRestoration />
         <Scripts />
+        <LiveReload />
       </body>
     </html>
   );
-}
-
-export default function App() {
-  return <Outlet />;
 }
