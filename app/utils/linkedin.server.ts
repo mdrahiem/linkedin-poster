@@ -4,12 +4,12 @@ const CLIENT_ID = process.env.LINKEDIN_CLIENT_ID as string;
 const CLIENT_SECRET = process.env.LINKEDIN_CLIENT_SECRET as string;
 const REDIRECT_URI = process.env.LINKEDIN_REDIRECT_URI as string;
 
-export function getAuthorizationUrl() {
+export function getAuthorizationUrl(redirectTo: string = "/dashboard") {
   const params = new URLSearchParams({
     response_type: "code",
     client_id: CLIENT_ID,
     redirect_uri: REDIRECT_URI,
-    // state: "random_state_string", // In a real app, generate this dynamically
+    state: redirectTo,
     scope: "email profile w_member_social openid",
   });
 

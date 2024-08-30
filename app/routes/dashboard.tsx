@@ -1,19 +1,14 @@
-import { ActionFunctionArgs, LoaderFunction, json } from "@remix-run/node";
-import { useLoaderData, Form, redirect } from "@remix-run/react";
+import { LoaderFunction, json, ActionFunction } from "@remix-run/node";
+import { useLoaderData, Form } from "@remix-run/react";
+import { requireAccessToken } from "~/utils/session.server";
 
 export const loader: LoaderFunction = async ({ request }) => {
-  const url = new URL(request.url);
-  const token = url.searchParams.get("token");
-
-  if (!token) {
-    return redirect("/");
-  }
-
-  return json({ token });
+  const accessToken = await requireAccessToken(request);
+  return json({ accessToken });
 };
 
 export default function Dashboard() {
-  const { token } = useLoaderData<typeof loader>();
+  const { accessToken } = useLoaderData<typeof loader>();
 
   return (
     <div>
@@ -38,14 +33,15 @@ export default function Dashboard() {
   );
 }
 
-export const action = async ({ request }: ActionFunctionArgs) => {
+export const action: ActionFunction = async ({ request }) => {
+  const accessToken = await requireAccessToken(request);
   const formData = await request.formData();
   const title = formData.get("title");
   const description = formData.get("description");
   const hashtags = formData.get("hashtags");
 
   // Here you would use the LinkedIn API to create a post
-  // You'll need to implement this part using the access token
+  // You can use the accessToken to authenticate the request
 
   return json({ success: true });
 };
