@@ -10,7 +10,7 @@ export function getAuthorizationUrl(redirectTo: string = "/dashboard") {
     client_id: CLIENT_ID,
     redirect_uri: REDIRECT_URI,
     state: redirectTo,
-    scope: "email profile w_member_social openid",
+    scope: "profile w_member_social openid email",
   });
 
   return `https://www.linkedin.com/oauth/v2/authorization?${params.toString()}`;

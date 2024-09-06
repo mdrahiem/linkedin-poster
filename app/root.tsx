@@ -9,10 +9,10 @@ import {
   ScrollRestoration,
   useRouteError,
 } from "@remix-run/react";
-import stylesUrl from "./styles/global.css";
+import globalStyles from "~/styles/global.css";
 
 export const links: LinksFunction = () => [
-  { rel: "stylesheet", href: stylesUrl },
+  { rel: "stylesheet", href: globalStyles },
 ];
 
 export default function App() {
