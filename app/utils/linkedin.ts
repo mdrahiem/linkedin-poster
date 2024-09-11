@@ -2,7 +2,6 @@ import axios from "axios";
 
 export async function postToLinkedIn(
   accessToken: string,
-  title: string,
   description: string,
   hashtags: string
 ) {
@@ -30,7 +29,7 @@ export async function postToLinkedIn(
     specificContent: {
       "com.linkedin.ugc.ShareContent": {
         shareCommentary: {
-          text: `${title}\n\n${description}\n\n${hashtags}`,
+          text: `${description}\n\n${hashtags}`,
         },
         shareMediaCategory: "NONE",
       },

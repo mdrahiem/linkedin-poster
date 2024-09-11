@@ -25,7 +25,6 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <h1>LinkedIn Poster</h1>
         <Outlet />
         <ScrollRestoration />
         <Scripts />
